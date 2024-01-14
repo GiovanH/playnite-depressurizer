@@ -1,0 +1,6 @@
+﻿Id: depressurizer_b72284b4-f6b5-4b32-86bd-93618c124be5
+Name: Export Completion to Depressurizer
+Author: GiovanH
+Version: 1.0
+Module: PowerShellScript.psm1
+Type: Script
