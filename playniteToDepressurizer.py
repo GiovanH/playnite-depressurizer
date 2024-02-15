@@ -18,12 +18,18 @@ def parseCsv(csv_path: str) -> typing.Iterable:
 def updateProfile(statuses: dict[str, list[str]], profile_path: str) -> None:
     dprofile: ET.ElementTree = ET.parse(profile_path)
 
-    dprofile.getroot().find("auto_import").text = "false"  # type: ignore[union-attr]
+    setting_import: typing.Optional[ET.Element] = dprofile.getroot().find("auto_import")
+    if not isinstance(setting_import, ET.Element):
+        raise ValueError("Profile missing 'auto_import' setting")
+    setting_import.text = "false"
 
-    games_tree: ET.Element = dprofile.getroot().find("games")  # type: ignore[assignment]
+    games_tree: typing.Optional[ET.Element] = dprofile.getroot().find("games") 
+    if not isinstance(games_tree, ET.ElementTree):
+        raise ValueError("Profile missing 'games' list")
+
     for status, game_ids in statuses.items():
         for game_id in game_ids:
-            match: ET.Element = games_tree.find(f"game[id='{game_id}']")  # type: ignore[assignment]
+            match: typing.Optional[ET.Element] = games_tree.find(f"game[id='{game_id}']")
             if not match:
                 # Create blank game
                 match = ET.SubElement(games_tree, 'game')
@@ -36,6 +42,7 @@ def updateProfile(statuses: dict[str, list[str]], profile_path: str) -> None:
 
                 matchcats = ET.SubElement(match, 'categories')
 
+            assert isinstance(match, ET.ElementTree)
             print(status, game_id, str(match))
 
             categories: ET.Element = match.find("categories")  # type: ignore[assignment]
@@ -64,6 +71,6 @@ if __name__ == "__main__":
     appdata = os.getenv('APPDATA')
     assert appdata is not None
 
-    profile_path = os.path.join(appdata, 'Depressurizer', 'playnite.profile')
+    profile_path: str = os.path.join(appdata, 'Depressurizer', 'playnite.profile')
 
     updateProfile(statuses, profile_path)
