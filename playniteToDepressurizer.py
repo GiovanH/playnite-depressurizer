@@ -20,12 +20,12 @@ def updateProfile(statuses: dict[str, list[str]], profile_path: str) -> None:
 
     setting_import: typing.Optional[ET.Element] = dprofile.getroot().find("auto_import")
     if not isinstance(setting_import, ET.Element):
-        raise ValueError("Profile missing 'auto_import' setting")
+        raise ValueError(f"Profile missing 'auto_import' setting {setting_import}")
     setting_import.text = "false"
 
     games_tree: typing.Optional[ET.Element] = dprofile.getroot().find("games") 
-    if not isinstance(games_tree, ET.ElementTree):
-        raise ValueError("Profile missing 'games' list")
+    if not isinstance(games_tree, (ET.ElementTree, ET.Element)):
+        raise ValueError(f"Profile missing 'games' list {games_tree}")
 
     for status, game_ids in statuses.items():
         for game_id in game_ids:
@@ -42,7 +42,7 @@ def updateProfile(statuses: dict[str, list[str]], profile_path: str) -> None:
 
                 matchcats = ET.SubElement(match, 'categories')
 
-            assert isinstance(match, ET.ElementTree)
+            assert isinstance(match, (ET.ElementTree, ET.Element))
             print(status, game_id, str(match))
 
             categories: ET.Element = match.find("categories")  # type: ignore[assignment]
@@ -72,5 +72,6 @@ if __name__ == "__main__":
     assert appdata is not None
 
     profile_path: str = os.path.join(appdata, 'Depressurizer', 'playnite.profile')
+    print(f"Updating profile {profile_path}")
 
     updateProfile(statuses, profile_path)

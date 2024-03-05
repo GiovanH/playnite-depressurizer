@@ -1,4 +1,6 @@
-# Export Completion to Depressurizer
+# playniteToDepressurizer
+
+Playnite extension that exports completion info to depressurizer to use as Steam collections.
 
 ## Requirements
 
@@ -15,4 +17,5 @@
 
 ## How it Works
 
-The powershell script exports your current view's games and their collection status to a CSV table. Then the playniteToDepressurizer.py script converts that CSV file into a depressurizer profile
+The powershell script exports your current view's games and their collection status to a CSV table. Then the playniteToDepressurizer.py script converts that CSV file into a depressurizer profile.
+

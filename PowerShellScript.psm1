@@ -14,9 +14,12 @@ function DepressurizerExport()
 		}                           
 		$results += New-Object PSObject -Property $details  
 	}
+	
+	Write-Host "Writing csv playniteexport.csv"
 	$CsvPath="$env:APPDATA\Depressurizer\playniteexport.csv"
 	$results | export-csv -Path $CsvPath -NoTypeInformation
 	
+	Write-Host "Running python conversion"
 	py -3 playniteToDepressurizer.py $CsvPath
 	
     $PlayniteApi.Dialogs.ShowMessage("Saved playnite depressurizer profile.")
