@@ -1,5 +1,5 @@
-﻿Id: playnite_to_depressurizer
-Type: Script
+﻿AddonId: playnite_to_depressurizer
+Type: Generic
 Name: Export Completion to Depressurizer
 Author: GiovanH
 Version: 1.1
@@ -9,5 +9,5 @@ SourceUrl: https://github.com/GiovanH/playnite-depressurizer
 ShortDescription: Playnite extension that exports completion info to depressurizer to use as Steam collections.
 Tags: ["Generic"]
 Links:
-  - GitHub: https://github.com/GiovanH/playnite-depressurizer
-  - Readme: https://github.com/GiovanH/playnite-depressurizer/blob/master/readme.md
+  GitHub: https://github.com/GiovanH/playnite-depressurizer
+  Readme: https://github.com/GiovanH/playnite-depressurizer/blob/master/readme.md

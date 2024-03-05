@@ -20,7 +20,7 @@ function DepressurizerExport()
 	$results | export-csv -Path $CsvPath -NoTypeInformation
 	
 	Write-Host "Running python conversion"
-	py -3 playniteToDepressurizer.py $CsvPath
+	py -3 csvToProfile.py $CsvPath
 	
     $PlayniteApi.Dialogs.ShowMessage("Saved playnite depressurizer profile.")
 }

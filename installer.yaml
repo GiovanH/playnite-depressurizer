@@ -1,0 +1,8 @@
+AddonId: playnite_to_depressurizer
+Packages:
+  - Version: 1.1
+    RequiredApiVersion: 5.6.0
+    ReleaseDate: 2024-03-05
+    PackageUrl: https://github.com/GiovanH/playnite-depressurizer/releases/download/v1.1/playnite_to_depressurizer_1_1.pext
+    Changelog:
+      - Initial Release
