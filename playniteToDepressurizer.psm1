@@ -7,7 +7,7 @@ function DepressurizerExport()
 	$results = @()
 	foreach ($game in $PlayniteApi.MainView.FilteredGames) {
 		$details = @{            
-			Nane             = $game.name             
+			Name             = $game.name
 			CompletionStatus = $game.CompletionStatus                 
 			GameId           = $game.GameId              
 			Source           = $game.Source

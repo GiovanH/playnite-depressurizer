@@ -23,12 +23,18 @@ def updateProfile(statuses: dict[str, list[str]], profile_path: str) -> None:
         raise ValueError(f"Profile missing 'auto_import' setting {setting_import}")
     setting_import.text = "false"
 
+    setting_update: typing.Optional[ET.Element] = dprofile.getroot().find("auto_update")
+    if not isinstance(setting_update, ET.Element):
+        raise ValueError(f"Profile missing 'auto_update' setting {setting_update}")
+    setting_update.text = "false"
+
     games_tree: typing.Optional[ET.Element] = dprofile.getroot().find("games") 
     if not isinstance(games_tree, (ET.ElementTree, ET.Element)):
         raise ValueError(f"Profile missing 'games' list {games_tree}")
 
     for status, game_ids in statuses.items():
-        for game_id in game_ids:
+        for game_obj in game_ids:
+            game_id = game_obj['GameId']
             match: typing.Optional[ET.Element] = games_tree.find(f"game[id='{game_id}']")
             if not match:
                 # Create blank game
@@ -38,7 +44,7 @@ def updateProfile(statuses: dict[str, list[str]], profile_path: str) -> None:
                 matchid.text = game_id
 
                 matchname = ET.SubElement(match, 'name')
-                matchname.text = "UNKNOWN"
+                matchname.text = game_obj['Name']
 
                 matchcats = ET.SubElement(match, 'categories')
 
@@ -64,7 +70,7 @@ if __name__ == "__main__":
     statuses = collections.defaultdict(list)
     games = list(parseCsv(args.csvfile))
     for game in games:
-        statuses[game['CompletionStatus']].append(game['GameId'])
+        statuses[game['CompletionStatus']].append(game)
 
     print(f"Gathered {len(games)} Steam games with {len(statuses.keys())} completion statuses")
 

@@ -1,3 +1,3 @@
-../playnite_to_depressurizer_1_1.pext: *.yaml *.psm1 *.md *.py
-	-../../Toolbox.exe verify addon giovanh_playnite_to_depressurizer.yaml
-	../../Toolbox.exe pack ./ ../
+../playnite_to_depressurizer_1_2.pext: *.yaml *.psm1 *.md *.py
+	$(LOCALAPPDATA)/Playnite/Toolbox.exe verify addon giovanh_playnite_to_depressurizer.yaml
+	$(LOCALAPPDATA)/Playnite/Toolbox.exe pack ./ ../

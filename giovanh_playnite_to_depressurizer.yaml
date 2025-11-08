@@ -2,7 +2,7 @@
 Type: Generic
 Name: Export Completion to Depressurizer
 Author: GiovanH
-Version: 1.1
+Version: 1.2
 Module: playniteToDepressurizer.psm1
 InstallerManifestUrl: https://github.com/GiovanH/playnite-depressurizer/raw/master/installer.yaml
 SourceUrl: https://github.com/GiovanH/playnite-depressurizer
